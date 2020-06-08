@@ -16,8 +16,17 @@
         <div class="travel-information">
             <h2>my trip to</h2>
             <div class="trip-info">
-                <input type="text" name="trip-destination" id="trip-destination">
-                <input type="date" name="trip-date" id="trip-date">
+                <form action="">
+                    <div class="form-section">
+                        <label for="trip-destination">location</label>
+                        <input type="text" name="trip-destination" id="trip-destination">
+                    </div>
+                    <div class="form-section">
+                        <label for="trip-date">departing</label>
+                        <input type="date" name="trip-date" id="trip-date">
+                    </div>
+                    <button class="button">go</button>
+                </form>
             </div>
             <div>
                 <button class="button">save trip</button>

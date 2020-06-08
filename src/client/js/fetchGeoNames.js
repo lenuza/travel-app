@@ -1,5 +1,7 @@
 const url = 'https://http://api.geonames.org/searchJSON?q='
 
+
+document.getElementById('trip-destination').addEventListener()
 // 'paris,FR&maxRows=1&username=lenuza'
 
 //async post request
