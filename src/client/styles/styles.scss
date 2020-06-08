@@ -47,6 +47,7 @@ header {
     }
 }
 
+
 /****************Media Queries*********/
 
 @media screen and (min-width: 1026px) {
@@ -63,6 +64,14 @@ header {
             .button {
                 width: 45%;
             }
+        }
+    }
+
+    .trip-info {
+
+        input {
+            width: 90%;
+            height: 1.5em;
         }
     }
 }
