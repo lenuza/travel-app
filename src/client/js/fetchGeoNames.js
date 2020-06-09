@@ -35,8 +35,8 @@ const displayData = (city, key) => {
     console.log(process.env.WEATHERBIT_APP_KEY)
     parseGeoData(city, key)
         .then(output => {
-            fetchWeatherBit(output.geonames[0].lat,output.geonames[0].lng,
-                output.geonames[0].countryName)
+            fetchWeatherBit(output.geonames[0].lat,output.geonames[0].lng)
+            fetchPixabay(output.geonames[0].countryName)
         })
         .catch(console.log)
 }
@@ -45,6 +45,7 @@ const fetchWeatherBit = (lat, lng) => {
     const start = Date.now()
     const tripDate = document.getElementById('trip-date').valueAsNumber
     console.log(tripDate - start)
+    //clearing the input field
     document.getElementById('trip-date').value = ''
     const diff = tripDate - start
 
@@ -66,6 +67,16 @@ const fetchWeatherBit = (lat, lng) => {
             console.log(err)
         })
     }
-
-
 }
+
+const fetchPixabay = (city) => {
+    return fetch(`https://pixabay.com/api/?key=${process.env.PIXABAY_APP_KEY}&q=${city}&image_type=photo&pretty=true`)
+            .then(res => {
+                return res.text()
+            })
+            .catch(err => {
+                console.log(err)
+            })
+}
+
+
