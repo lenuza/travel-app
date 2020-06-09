@@ -42,11 +42,30 @@ const displayData = (city, key) => {
 }
 
 const fetchWeatherBit = (lat, lng) => {
-    return fetch(`http://api.weatherbit.io/v2.0/current?&lat=${lat}&lon=${lng}&key=${process.env.WEATHERBIT_APP_KEY}`)
-            .then(res => {
-                return res.text()
-            })
-            .catch(err => {
-                console.log(err)
-            })
+    const start = Date.now()
+    const tripDate = document.getElementById('trip-date').valueAsNumber
+    console.log(tripDate - start)
+    document.getElementById('trip-date').value = ''
+    const diff = tripDate - start
+
+    if(diff <= 535041095) {
+        return fetch(`http://api.weatherbit.io/v2.0/current?&lat=${lat}&lon=${lng}&key=${process.env.WEATHERBIT_APP_KEY}`)
+        .then(res => {
+            return res.text()
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+    else {
+        return fetch(`http://api.weatherbit.io/v2.0/forecast/daily?&lat=${lat}&lon=${lng}&key=${process.env.WEATHERBIT_APP_KEY}`)
+        .then(res => {
+            return res.text()
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+
 }
