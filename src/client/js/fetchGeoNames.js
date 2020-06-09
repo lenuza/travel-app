@@ -22,7 +22,7 @@ const fetchGeoName = (city, key) => {
             })
 }
 
-const buildData = (city, key) => {
+const parseGeoData = (city, key) => {
     return fetchGeoName(city, key)
         .then(text => {
             return JSON.parse(text)
@@ -32,9 +32,21 @@ const buildData = (city, key) => {
 
 
 const displayData = (city, key) => {
-    buildData(city, key)
+    console.log(process.env.WEATHERBIT_APP_KEY)
+    parseGeoData(city, key)
         .then(output => {
-            console.log(output)
+            fetchWeatherBit(output.geonames[0].lat,output.geonames[0].lng,
+                output.geonames[0].countryName)
         })
         .catch(console.log)
+}
+
+const fetchWeatherBit = (lat, lng) => {
+    return fetch(`http://api.weatherbit.io/v2.0/current?&lat=${lat}&lon=${lng}&key=${process.env.WEATHERBIT_APP_KEY}`)
+            .then(res => {
+                return res.text()
+            })
+            .catch(err => {
+                console.log(err)
+            })
 }
