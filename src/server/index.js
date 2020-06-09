@@ -23,38 +23,19 @@ const server = app.listen(port, () => {
     console.log(`Hello, listening on port ${port} ${process.env.GEONAMES_APP_ID}`);
 });
 
-app.get('/getWeatherData', (req, res) => {
-    res.send(projectData);
-    console.log('data sent')
-});
+// app.get('/getWeatherData', (req, res) => {
+//     res.send(projectData);
+//     console.log('data sent')
+// });
 
-app.post('/weatherData', (req, res) => {
-    var newEntry = {
-        temperature: req.body.temperature,
-        city: req.body.city,
-        date: req.body.date,
-        content: req.body.content
-    }
+// app.post('/weatherData', (req, res) => {
+//     var newEntry = {
+//         temperature: req.body.temperature,
+//         city: req.body.city,
+//         date: req.body.date,
+//         content: req.body.content
+//     }
 
-    projectData['newEntry'] = newEntry;
-    console.log(projectData)
-})
-
-function getWeather() {
-    console.log(API_ID)
-    const city = document.getElementById('trip-destination').value
-    cityWeather(url, city, API_ID)
-        .then(function (data) {
-            console.log(data);
-            postData('/weatherData', {
-                temperature: data.main.temp,
-                city: data.name,
-                date: new Date(),
-                content: content.value
-            })
-        })
-        .then(function () {
-            getData();
-        })
-
-}
+//     projectData['newEntry'] = newEntry;
+//     console.log(projectData)
+// })
