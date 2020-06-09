@@ -1,40 +1,42 @@
 const url = 'https://http://api.geonames.org/searchJSON?q='
 
-
-document.getElementById('trip-destination').addEventListener()
+document.getElementById('button').addEventListener('click', getWeather)
 // 'paris,FR&maxRows=1&username=lenuza'
 
-//async post request
-// const postData = async (url = '', data = {}) => {
-//     const response = await fetch(url, {
-//         method: 'POST',
-//         credentials: 'same-origin',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(data),
-//     });
+// async post request
+const postData = async (url = '', data = {}) => {
+    const response = await fetch(url, {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    });
 
-//     try {
-//         const newData = await response.json();
-//         return newData;
-//     } catch (error) {
-//         console.log("error", error);
-//     }
-// }
+    try {
+        const newData = await response.json();
+        return newData;
+    } catch (error) {
+        console.log("error", error);
+    }
+}
 
 //get the city and then fetch, post and update UI
 function getWeather() {
+    console.log("hellooooooo" + process.env.GEONAMES_APP_ID)
     const city = document.getElementById('trip-destination').value
-    cityWeather(url, city, apiID)
+    const key = process.env.GEONAMES_APP_ID
+
+    cityWeather(url, city, key)
         .then(function (data) {
             console.log(data);
-            // postData('/weatherData', {
-            //     temperature: data.main.temp,
-            //     city: data.name,
-            //     date: new Date(),
-            //     content: content.value
-            // })
+            postData('/weatherData', {
+                temperature: data.main.temp,
+                city: data.name,
+                date: new Date(),
+                content: content.value
+            })
         })
         // .then(function () {
         //     getData();
@@ -56,19 +58,19 @@ const cityWeather = async (url, city, key) => {
 }
 
 // async get request
-// const getData = async (url = '/getWeatherData') => {
+const getData = async (url = '/getWeatherData') => {
 
-//     const request = await fetch(url);
+    const request = await fetch(url);
 
-//     try {
-//         const allData = await request.json();
-//         // document.getElementById('city').innerHTML = allData.newEntry.city;
-//         // document.getElementById('date').innerHTML = allData.newEntry.date;
-//         // document.getElementById('temp').innerHTML = allData.newEntry.temperature + ' °F';
-//         // document.getElementById('content').innerHTML = allData.newEntry.content;
+    try {
+        const allData = await request.json();
+        // document.getElementById('city').innerHTML = allData.newEntry.city;
+        // document.getElementById('date').innerHTML = allData.newEntry.date;
+        // document.getElementById('temp').innerHTML = allData.newEntry.temperature + ' °F';
+        // document.getElementById('content').innerHTML = allData.newEntry.content;
 
-//         // feelings.value = '';
-//     } catch (error) {
-//         console.log("error", error);
-//     }
-// }
+        // feelings.value = '';
+    } catch (error) {
+        console.log("error", error);
+    }
+}

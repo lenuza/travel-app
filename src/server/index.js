@@ -1,14 +1,10 @@
 //endpoint for all routes
+require('dotenv').config()
 const projectData = {};
 const path = require('path')
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const dotenv = require('dotenv')
-
-dotenv.config()
-
-const apiID = process.env.API_ID
 
 const app = express()
 
@@ -24,7 +20,7 @@ app.get('/', function (req, res) {
 // set port
 const port = process.env.port || 8000;
 const server = app.listen(port, () => {
-    console.log(`Hello, listening on port ${port}`);
+    console.log(`Hello, listening on port ${port} ${process.env.GEONAMES_APP_ID}`);
 });
 
 app.get('/getWeatherData', (req, res) => {
@@ -42,4 +38,23 @@ app.post('/weatherData', (req, res) => {
 
     projectData['newEntry'] = newEntry;
     console.log(projectData)
-});
+})
+
+function getWeather() {
+    console.log(API_ID)
+    const city = document.getElementById('trip-destination').value
+    cityWeather(url, city, API_ID)
+        .then(function (data) {
+            console.log(data);
+            postData('/weatherData', {
+                temperature: data.main.temp,
+                city: data.name,
+                date: new Date(),
+                content: content.value
+            })
+        })
+        .then(function () {
+            getData();
+        })
+
+}
