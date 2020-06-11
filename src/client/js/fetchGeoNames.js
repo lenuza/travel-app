@@ -1,7 +1,5 @@
 const { getData } = require('./displayTripData')
 
-const url = 'http://api.geonames.org/searchJSON?q='
-
 document.getElementById('button').addEventListener('click', getCityData)
 
 //get the city and then fetch city data
@@ -11,17 +9,17 @@ function getCityData() {
     document.getElementById('trip-destination').value = ''
     const key = process.env.GEONAMES_APP_ID
 
-    displayData(city, key)
+    passCityData(city, key)
 }
 
-const fetchGeoName = (city, key) => {
-    return fetch(url + city + '&maxRows=1&username=' + key)
-            .then(res => {
-                return res.text()
-            })
-            .catch(err => {
-                console.log(err)
-            })
+const passCityData = (city, key) => {
+
+    parseGeoData(city, key)
+        .then(output => {
+            fetchWeatherBit(output.geonames[0].lat,output.geonames[0].lng, output.geonames[0].name)
+            fetchPixabay(output.geonames[0].countryName)
+        })
+        .catch(console.log)
 }
 
 const parseGeoData = (city, key) => {
@@ -32,21 +30,31 @@ const parseGeoData = (city, key) => {
         .catch(console.log)
 }
 
+const fetchPixabay = (city) => {
+    return fetch(`https://pixabay.com/api/?key=${process.env.PIXABAY_APP_KEY}&q=${city}&image_type=photo&pretty=true`)
+            .then(res => {
+                return res.text()
+            })
+            .catch(err => {
+                console.log(err)
+            })
+}
 
-const displayData = (city, key) => {
-    console.log(process.env.WEATHERBIT_APP_KEY)
-    parseGeoData(city, key)
-        .then(output => {
-            fetchWeatherBit(output.geonames[0].lat,output.geonames[0].lng, output.geonames[0].name)
-            fetchPixabay(output.geonames[0].countryName)
-        })
-        .catch(console.log)
+const fetchGeoName = (city, key) => {
+    const url = 'http://api.geonames.org/searchJSON?q='
+
+    return fetch(url + city + '&maxRows=1&username=' + key)
+            .then(res => {
+                return res.text()
+            })
+            .catch(err => {
+                console.log(err)
+            })
 }
 
 const fetchWeatherBit = (lat, lng, city) => {
     const start = Date.now()
     const tripDate = document.getElementById('trip-date').valueAsNumber
-    console.log(tripDate - start)
     //clearing the input field
     document.getElementById('trip-date').value = ''
     const diff = tripDate - start
@@ -57,11 +65,12 @@ const fetchWeatherBit = (lat, lng, city) => {
             return res.json()
         })
         .then(data => {
-            postData('/weatherData', {
-                city: data.data[0].city_name,
-                description: data.data[0].weather.description,
-                temperature: data.data[0].temp
-            })
+            console.log(data)
+                postData('http://localhost:8000/weatherData', {
+                        city: data.data[0].city_name,
+                        description: data.data[0].weather.description,
+                        temperature: data.data[0].temp
+                }).then( () => { getData() })
         })
         .catch(err => {
             console.log(err)
@@ -73,30 +82,17 @@ const fetchWeatherBit = (lat, lng, city) => {
             return res.json()
         })
         .then(data => {
-            postData('http://localhost:8000/weatherData', {
-                city: city, // forecast weather does not have city name so cannnot pull it from the API
-                description: data.data[0].weather.description,
-                temperature: data.data[0].temp
-            })
-        })
-        .then(function () {
-            getData();
-        })
-
+            console.log(data)
+                postData('http://localhost:8000/weatherData', {
+                        city: city, // forecast weather does not have city name so cannnot pull it from the API
+                        description: data.data[0].weather.description,
+                        temperature: data.data[0].temp
+                })
+        }).then(() => { getData() })
         .catch(err => {
             console.log(err)
         })
     }
-}
-
-const fetchPixabay = (city) => {
-    return fetch(`https://pixabay.com/api/?key=${process.env.PIXABAY_APP_KEY}&q=${city}&image_type=photo&pretty=true`)
-            .then(res => {
-                return res.text()
-            })
-            .catch(err => {
-                console.log(err)
-            })
 }
 
 //async post request
@@ -111,13 +107,13 @@ async function postData (url = '', data = {}) {
     });
 
     try {
-        const newData = await response;
+        console.log(response.json())
+        const newData =  await response.json();
         return newData;
     } catch (error) {
         console.log("error", error);
     }
 }
-
 
 // exports.displayData = displayData
 // exports.buildData = buildData

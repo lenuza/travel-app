@@ -1,5 +1,5 @@
-//endpoint for all routes
 require('dotenv').config()
+//endpoint for all routes
 const projectData = {};
 const path = require('path')
 const express = require('express')
@@ -21,12 +21,7 @@ app.get('/', function (req, res) {
 const port = process.env.port || 8000;
 const server = app.listen(port, () => {
     console.log(`Hello, listening on port ${port} ${process.env.GEONAMES_APP_ID}`);
-});
-
-app.get('/getWeatherData', (req, res) => {
-    res.send(projectData);
-    console.log('data sent')
-});
+})
 
 app.post('/weatherData', (req, res) => {
     var newEntry = {
@@ -36,7 +31,12 @@ app.post('/weatherData', (req, res) => {
     }
 
     projectData['newEntry'] = newEntry;
-    console.log(projectData)
+    console.log(newEntry)
+})
+
+app.get('/getWeatherData', (req, res) => {
+    res.send(projectData);
+    console.log('data sent')
 })
 
 app.use(function (req, res, next) {
