@@ -8,13 +8,13 @@ module.exports = {
     entry: [
         './src/client/index.js'
     ],
-    devServer: {
-        proxy: {
-            '/api': {
-                'target': 'http://localhost:8000'
-            }
-        }
-    },
+    // devServer: {
+    //     proxy: {
+    //         '/api': {
+    //             'target': 'http://localhost:8000'
+    //         }
+    //     }
+    // },
     node: {
         fs: 'empty'
     },

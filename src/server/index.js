@@ -23,19 +23,22 @@ const server = app.listen(port, () => {
     console.log(`Hello, listening on port ${port} ${process.env.GEONAMES_APP_ID}`);
 });
 
-// app.get('/getWeatherData', (req, res) => {
-//     res.send(projectData);
-//     console.log('data sent')
-// });
+app.get('/getWeatherData', (req, res) => {
+    res.send(projectData);
+    console.log('data sent')
+});
 
-// app.post('/weatherData', (req, res) => {
-//     var newEntry = {
-//         temperature: req.body.temperature,
-//         city: req.body.city,
-//         date: req.body.date,
-//         content: req.body.content
-//     }
+app.post('/weatherData', (req, res) => {
+    var newEntry = {
+        city: req.body.city,
+        description: req.body.description,
+        temperature: req.body.temperature
+    }
 
-//     projectData['newEntry'] = newEntry;
-//     console.log(projectData)
-// })
+    projectData['newEntry'] = newEntry;
+    console.log(projectData)
+})
+
+app.use(function (req, res, next) {
+    res.status(404).send("Sorry can't find that!")
+})

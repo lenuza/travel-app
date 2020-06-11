@@ -1,3 +1,5 @@
+const { getData } = require('./displayTripData')
+
 const url = 'http://api.geonames.org/searchJSON?q='
 
 document.getElementById('button').addEventListener('click', getCityData)
@@ -35,13 +37,13 @@ const displayData = (city, key) => {
     console.log(process.env.WEATHERBIT_APP_KEY)
     parseGeoData(city, key)
         .then(output => {
-            fetchWeatherBit(output.geonames[0].lat,output.geonames[0].lng)
+            fetchWeatherBit(output.geonames[0].lat,output.geonames[0].lng, output.geonames[0].name)
             fetchPixabay(output.geonames[0].countryName)
         })
         .catch(console.log)
 }
 
-const fetchWeatherBit = (lat, lng) => {
+const fetchWeatherBit = (lat, lng, city) => {
     const start = Date.now()
     const tripDate = document.getElementById('trip-date').valueAsNumber
     console.log(tripDate - start)
@@ -52,7 +54,14 @@ const fetchWeatherBit = (lat, lng) => {
     if(diff <= 535041095) {
         return fetch(`http://api.weatherbit.io/v2.0/current?&lat=${lat}&lon=${lng}&key=${process.env.WEATHERBIT_APP_KEY}`)
         .then(res => {
-            return res.text()
+            return res.json()
+        })
+        .then(data => {
+            postData('/weatherData', {
+                city: data.data[0].city_name,
+                description: data.data[0].weather.description,
+                temperature: data.data[0].temp
+            })
         })
         .catch(err => {
             console.log(err)
@@ -61,8 +70,19 @@ const fetchWeatherBit = (lat, lng) => {
     else {
         return fetch(`http://api.weatherbit.io/v2.0/forecast/daily?&lat=${lat}&lon=${lng}&key=${process.env.WEATHERBIT_APP_KEY}`)
         .then(res => {
-            return res.text()
+            return res.json()
         })
+        .then(data => {
+            postData('http://localhost:8000/weatherData', {
+                city: city, // forecast weather does not have city name so cannnot pull it from the API
+                description: data.data[0].weather.description,
+                temperature: data.data[0].temp
+            })
+        })
+        .then(function () {
+            getData();
+        })
+
         .catch(err => {
             console.log(err)
         })
@@ -79,4 +99,25 @@ const fetchPixabay = (city) => {
             })
 }
 
+//async post request
+async function postData (url = '', data = {}) {
+    const response = await fetch(url, {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    });
 
+    try {
+        const newData = await response;
+        return newData;
+    } catch (error) {
+        console.log("error", error);
+    }
+}
+
+
+// exports.displayData = displayData
+// exports.buildData = buildData
