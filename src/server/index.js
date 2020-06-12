@@ -27,7 +27,9 @@ app.post('/weatherData', (req, res) => {
     var newEntry = {
         city: req.body.city,
         description: req.body.description,
-        temperature: req.body.temperature
+        temperature: req.body.temperature,
+        image: req.body.image,
+        imgTag: req.body.imgTag
     }
 
     projectData['newEntry'] = newEntry;

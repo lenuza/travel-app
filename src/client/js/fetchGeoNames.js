@@ -4,21 +4,22 @@ document.getElementById('button').addEventListener('click', getCityData)
 
 //get the city and then fetch city data
 function getCityData() {
+
     const city = document.getElementById('trip-destination').value
     //clearing the input field
     document.getElementById('trip-destination').value = ''
-    const key = process.env.GEONAMES_APP_ID
 
-    passCityData(city, key)
+    passCityData(city, process.env.GEONAMES_APP_ID)
 }
 
 const passCityData = (city, key) => {
 
     parseGeoData(city, key)
-        .then(output => {
-            fetchWeatherBit(output.geonames[0].lat,output.geonames[0].lng, output.geonames[0].name)
+        .then(output =>
             fetchPixabay(output.geonames[0].countryName)
-        })
+                .then(imgData => {
+                    fetchWeatherBit(output.geonames[0].lat,output.geonames[0].lng, output.geonames[0].name, imgData)
+                }))
         .catch(console.log)
 }
 
@@ -36,27 +37,26 @@ const fetchPixabay = (city) => {
                 return res.json()
             })
             .then( data => {
-                console.log(data.hits[0].webformatURL)
-                document.getElementById('trip-img').setAttribute('src', data.hits[0].webformatURL)
+                return data
             })
-            .catch(err => {
-                console.log(err)
-            })
+            .catch(console.log)
 }
+
+// console.log(data.hits[0].webformatURL)
+// document.getElementById('trip-img').setAttribute('src', data.hits[0].webformatURL)
+// document.getElementById('trip-img').setAttribute('alt', data.hits[0].tags)
 
 const fetchGeoName = (city, key) => {
     const url = 'http://api.geonames.org/searchJSON?q='
 
     return fetch(url + city + '&maxRows=1&username=' + key)
-            .then(res => {
-                return res.text()
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        .then(res => {
+            return res.text()
+        })
+        .catch(console.log)
 }
 
-const fetchWeatherBit = (lat, lng, city) => {
+const fetchWeatherBit = (lat, lng, city, imgData) => {
     const start = Date.now()
     const tripDate = document.getElementById('trip-date').valueAsNumber
     //clearing the input field
@@ -69,16 +69,16 @@ const fetchWeatherBit = (lat, lng, city) => {
             return res.json()
         })
         .then(data => {
-            console.log(data)
-                postData('http://localhost:8000/weatherData', {
-                        city: data.data[0].city_name,
-                        description: data.data[0].weather.description,
-                        temperature: data.data[0].temp
-                }).then( () => { getData() })
+            console.log(imgData)
+            postData('http://localhost:8000/weatherData', {
+                city: data.data[0].city_name,
+                description: data.data[0].weather.description,
+                temperature: data.data[0].temp,
+                image: imgData.hits[0].webformatURL,
+                imgTag: imgData.hits[0].tags
+            }).then( () => { getData() })
         })
-        .catch(err => {
-            console.log(err)
-        })
+        .catch(console.log)
     }
     else {
         return fetch(`http://api.weatherbit.io/v2.0/forecast/daily?&lat=${lat}&lon=${lng}&key=${process.env.WEATHERBIT_APP_KEY}`)
@@ -86,18 +86,24 @@ const fetchWeatherBit = (lat, lng, city) => {
             return res.json()
         })
         .then(data => {
-            console.log(data)
-                postData('http://localhost:8000/weatherData', {
-                        city: city, // forecast weather does not have city name so cannnot pull it from the API
-                        description: data.data[0].weather.description,
-                        temperature: data.data[0].temp
-                })
-        }).then(() => { getData() })
-        .catch(err => {
-            console.log(err)
+            console.log(imgData)
+            postData('http://localhost:8000/weatherData', {
+                city: city,
+                description: data.data[0].weather.description,
+                temperature: data.data[0].temp,
+                image: imgData.hits[0].webformatURL,
+                imgTag: imgData.hits[0].tags
+            }).then( () => { getData() })
         })
+        .catch(console.log)
     }
 }
+
+// Promise.all([fetchWeatherBit, fetchPixabay ]).then((values) => {
+//     console.log(values)
+// })
+
+
 
 //async post request
 async function postData (url = '', data = {}) {
@@ -112,10 +118,10 @@ async function postData (url = '', data = {}) {
 
     try {
         console.log(response.json())
-        const newData =  await response.json();
-        return newData;
+        const newData =  await response.json()
+        return newData
     } catch (error) {
-        console.log("error", error);
+        console.log("error", error)
     }
 }
 
