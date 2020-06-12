@@ -31,9 +31,13 @@ const parseGeoData = (city, key) => {
 }
 
 const fetchPixabay = (city) => {
-    return fetch(`https://pixabay.com/api/?key=${process.env.PIXABAY_APP_KEY}&q=${city}&image_type=photo&pretty=true`)
+    return fetch(`https://pixabay.com/api/?key=${process.env.PIXABAY_APP_KEY}&q=${city}&image_type=photo&pretty=true&category=nature`)
             .then(res => {
-                return res.text()
+                return res.json()
+            })
+            .then( data => {
+                console.log(data.hits[0].webformatURL)
+                document.getElementById('trip-img').setAttribute('src', data.hits[0].webformatURL)
             })
             .catch(err => {
                 console.log(err)
