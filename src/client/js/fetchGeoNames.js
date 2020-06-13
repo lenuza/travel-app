@@ -76,8 +76,8 @@ const fetchWeatherBit = (lat, lng, city, imgData) => {
                 temperature: data.data[0].temp,
                 image: imgData.hits[0].webformatURL,
                 imgTag: imgData.hits[0].tags
-            }).then( () => { getData() })
-        })
+            })
+        }).then( () => { getData() })
         .catch(console.log)
     }
     else {
@@ -93,17 +93,11 @@ const fetchWeatherBit = (lat, lng, city, imgData) => {
                 temperature: data.data[0].temp,
                 image: imgData.hits[0].webformatURL,
                 imgTag: imgData.hits[0].tags
-            }).then( () => { getData() })
-        })
+            })
+        }).then( () => { getData() })
         .catch(console.log)
     }
 }
-
-// Promise.all([fetchWeatherBit, fetchPixabay ]).then((values) => {
-//     console.log(values)
-// })
-
-
 
 //async post request
 async function postData (url = '', data = {}) {
@@ -124,6 +118,3 @@ async function postData (url = '', data = {}) {
         console.log("error", error)
     }
 }
-
-// exports.displayData = displayData
-// exports.buildData = buildData
