@@ -1,4 +1,4 @@
-const { getData } = require('./displayTripData')
+const { displayData } = require('./displayTripData')
 
 document.getElementById('button').addEventListener('click', getCityData)
 
@@ -77,7 +77,7 @@ const fetchWeatherBit = (lat, lng, city, imgData) => {
                 image: imgData.hits[0].webformatURL,
                 imgTag: imgData.hits[0].tags
             })
-        }).then( () => { getData() })
+        }).then( () => { displayData() })
         .catch(console.log)
     }
     else {
@@ -94,7 +94,7 @@ const fetchWeatherBit = (lat, lng, city, imgData) => {
                 image: imgData.hits[0].webformatURL,
                 imgTag: imgData.hits[0].tags
             })
-        }).then( () => { getData() })
+        }).then( () => { displayData() })
         .catch(console.log)
     }
 }

@@ -1,16 +1,21 @@
 // async get request
 const getData = async (url = 'http://localhost:8000/getWeatherData') => {
-    console.log('Got the data, mam')
-    const request = await fetch(url);
+    const request = await fetch(url)
     try {
-        const allData = await request.json();
-        console.log(allData)
-        document.getElementById('city').innerHTML = allData.newEntry.city
-        document.getElementById('description').innerHTML = allData.newEntry.description
-        document.getElementById('temp').innerHTML = allData.newEntry.temperature + ' °C'
+        const allData = await request.json()
+        return allData
     } catch (error) {
         console.log("error", error)
     }
 }
 
-exports.getData = getData
+const displayData = async () => {
+    getData()
+    .then(data => {
+        document.getElementById('city').innerHTML = data.newEntry.city
+        document.getElementById('description').innerHTML = data.newEntry.description
+        document.getElementById('temp').innerHTML = data.newEntry.temperature + ' °C'
+    })
+}
+
+exports.displayData = displayData
