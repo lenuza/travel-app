@@ -19,3 +19,4 @@ const displayData = async () => {
 }
 
 exports.displayData = displayData
+exports.getData = getData
