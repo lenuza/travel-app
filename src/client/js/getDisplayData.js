@@ -15,8 +15,11 @@ const displayData = async () => {
         document.getElementById('city').innerHTML = data.newEntry.city
         document.getElementById('description').innerHTML = data.newEntry.description
         document.getElementById('temp').innerHTML = data.newEntry.temperature + ' °C'
+        document.getElementById('trip-img').setAttribute('src', data.newEntry.image)
+        document.getElementById('trip-img').setAttribute('alt', data.newEntry.imgTag)
     })
 }
+
 
 exports.displayData = displayData
 exports.getData = getData

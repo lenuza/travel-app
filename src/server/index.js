@@ -20,7 +20,7 @@ app.get('/', function (req, res) {
 // set port
 const port = process.env.port || 8000;
 const server = app.listen(port, () => {
-    console.log(`Hello, listening on port ${port} ${process.env.GEONAMES_APP_ID}`);
+    console.log(`Hello, listening on port ${port}`);
 })
 
 app.post('/weatherData', (req, res) => {

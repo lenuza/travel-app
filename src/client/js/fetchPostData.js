@@ -1,8 +1,7 @@
-const { displayData } = require('./displayTripData')
+const { displayData } = require('./getDisplayData')
 
 document.getElementById('button').addEventListener('click', getCityData)
 
-//get the city and then fetch city data
 function getCityData() {
 
     const city = document.getElementById('trip-destination').value
@@ -41,10 +40,6 @@ const fetchPixabay = (city) => {
             })
             .catch(console.log)
 }
-
-// console.log(data.hits[0].webformatURL)
-// document.getElementById('trip-img').setAttribute('src', data.hits[0].webformatURL)
-// document.getElementById('trip-img').setAttribute('alt', data.hits[0].tags)
 
 const fetchGeoName = (city, key) => {
     const url = 'http://api.geonames.org/searchJSON?q='
