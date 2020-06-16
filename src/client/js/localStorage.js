@@ -1,23 +1,19 @@
 const { getData } = require('./getDisplayData')
-const { savedTrips } = require('./userTrips')
-let tripArray = []
+const { displaySavedTrips } = require('./userTrips')
+let tripObject = {trip: []}
 
 function setData (){
     getData()
     .then(data => {
         console.log(data)
-        tripArray.push(data)
-        localStorage.setItem('trips', JSON.stringify(tripArray))
-        tripArray = []
-    })
-    .then( () => {
-        savedTrips()
+        tripObject.trip.push(data)
+        localStorage.setItem('trips', JSON.stringify(tripObject.trip))
+        displaySavedTrips(data)
     })
 }
 
 function removeData (){
     localStorage.removeItem('trips')
-    console.log('removed')
 }
 
 
