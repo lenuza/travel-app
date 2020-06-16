@@ -1,6 +1,6 @@
 const { getData } = require('./getDisplayData')
 const { savedTrips } = require('./userTrips')
-const tripArray = []
+let tripArray = []
 
 function setData (){
     getData()
@@ -8,6 +8,7 @@ function setData (){
         console.log(data)
         tripArray.push(data)
         localStorage.setItem('trips', JSON.stringify(tripArray))
+        tripArray = []
     })
     .then( () => {
         savedTrips()

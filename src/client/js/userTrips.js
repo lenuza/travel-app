@@ -6,9 +6,7 @@ const savedTrips = () => {
 
 const displaySavedTrips = (savedTrip) => {
     const allTrips = document.getElementById('saved-trips')
-
-    for (var i = 0; i <= savedTrip.length; i++) {
-        console.log(savedTrip[i])
+    for (var i = 0; i < savedTrip.length; i++) {
         const holder = document.createElement('div')
         holder.setAttribute('class', 'user-trips')
         const parag1 = document.createElement('p')
@@ -16,7 +14,7 @@ const displaySavedTrips = (savedTrip) => {
         const parag3 = document.createElement('p')
         const parag4 = document.createElement('image')
         parag1.innerHTML = savedTrip[i].newEntry.city
-        parag1.innerHTML = savedTrip[i].newEntry.description
+        parag2.innerHTML = savedTrip[i].newEntry.description
         parag3.innerHTML = savedTrip[i].newEntry.temperature + ' °C'
         parag4.setAttribute('src', savedTrip[i].newEntry.image)
         parag4.setAttribute('alt', savedTrip[i].newEntry.imgTag)
@@ -26,7 +24,6 @@ const displaySavedTrips = (savedTrip) => {
         holder.appendChild(parag4)
         allTrips.appendChild(holder)
     }
-
 }
 
 exports.savedTrips = savedTrips
