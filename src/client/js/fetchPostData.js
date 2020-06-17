@@ -64,15 +64,15 @@ const fetchWeatherBit = (lat, lng, city, imgData) => {
             return res.json()
         })
         .then(data => {
-            console.log(imgData)
-            postData('http://localhost:8000/weatherData', {
+            return postData('http://localhost:8000/weatherData', {
                 city: data.data[0].city_name,
                 description: data.data[0].weather.description,
                 temperature: data.data[0].temp,
                 image: imgData.hits[0].webformatURL,
                 imgTag: imgData.hits[0].tags
             })
-        }).then( () => { displayData() })
+        })
+        .then( () =>  displayData())
         .catch(console.log)
     }
     else {
@@ -81,7 +81,6 @@ const fetchWeatherBit = (lat, lng, city, imgData) => {
             return res.json()
         })
         .then(data => {
-            console.log(imgData)
             postData('http://localhost:8000/weatherData', {
                 city: city,
                 description: data.data[0].weather.description,
@@ -89,7 +88,8 @@ const fetchWeatherBit = (lat, lng, city, imgData) => {
                 image: imgData.hits[0].webformatURL,
                 imgTag: imgData.hits[0].tags
             })
-        }).then( () => { displayData() })
+        })
+        .then( () =>  displayData())
         .catch(console.log)
     }
 }
@@ -105,11 +105,6 @@ async function postData (url = '', data = {}) {
         body: JSON.stringify(data),
     });
 
-    try {
-        console.log(response.json())
-        const newData =  await response.json()
-        return newData
-    } catch (error) {
-        console.log("error", error)
-    }
+    const newData =  await response.json()
+    return newData
 }

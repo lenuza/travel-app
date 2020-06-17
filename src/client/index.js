@@ -7,8 +7,7 @@ import { cityWeather } from './js/fetchPostData'
 import { getData } from './js/getDisplayData'
 import { setData } from './js/localStorage'
 import { removeData } from './js/localStorage'
-// import { savedTrips } from './js/userTrips'
-import { displaySavedTrips } from './js/userTrips'
+// import { displaySavedTrips } from './js/userTrips'
 
 export {
     postData,
@@ -17,6 +16,5 @@ export {
     getData,
     setData,
     removeData,
-    // savedTrips,
-    displaySavedTrips
+    // displaySavedTrips
 }
