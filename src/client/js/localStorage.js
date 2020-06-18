@@ -21,7 +21,9 @@ document.getElementById('saved-trips').addEventListener('click', removeTrip)
 function removeTrip() {
     const tripToDelete = document.getElementById('saved-trips').removeChild(event.target.parentNode)
     console.log(tripToDelete.id)
-    const tripsLeft = JSON.parse(localStorage.getItem('trips')).filter(trip => trip.newEntry.city != tripToDelete.id )
+    const tripsLeft = JSON.parse(localStorage.getItem('trips')).filter(trip => {
+        trip.newEntry.city+trip.newEntry.tripDuration != tripToDelete.id //in case there are more then 1 trip to one destination
+    })
     return  localStorage.setItem('trips', JSON.stringify(tripsLeft))
 }
 
