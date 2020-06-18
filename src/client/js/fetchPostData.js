@@ -54,10 +54,16 @@ const fetchGeoName = (city, key) => {
 
 const fetchWeatherBit = (lat, lng, city, imgData) => {
     const start = Date.now()
-    const tripDate = document.getElementById('trip-date').valueAsNumber
-    //clearing the input field
-    document.getElementById('trip-date').value = ''
-    const diff = tripDate - start
+    const startDate = document.getElementById('start-date').valueAsNumber
+    const returnDate = document.getElementById('return-date').valueAsNumber
+    //clearing the input fields
+    document.getElementById('start-date').value = ''
+    document.getElementById('return-date').value = ''
+    //calculate which wetaher data to get current or after a week
+    const diff = startDate - start
+    //calculate trip duration
+    const tripDuration = Math.floor((returnDate - startDate)/86400000)
+    console.log(Math.floor((returnDate - startDate)/86400000))
 
     if(diff <= 535041095) {
         return fetch(`http://api.weatherbit.io/v2.0/current?&lat=${lat}&lon=${lng}&key=${process.env.WEATHERBIT_APP_KEY}`)
@@ -69,6 +75,7 @@ const fetchWeatherBit = (lat, lng, city, imgData) => {
                 city: data.data[0].city_name,
                 description: data.data[0].weather.description,
                 temperature: data.data[0].temp,
+                tripDuration: tripDuration,
                 image: imgData.hits[0].webformatURL,
                 imgTag: imgData.hits[0].tags
             }).then( () =>  displayData())
@@ -85,6 +92,7 @@ const fetchWeatherBit = (lat, lng, city, imgData) => {
                 city: city,
                 description: data.data[0].weather.description,
                 temperature: data.data[0].temp,
+                tripDuration: tripDuration,
                 image: imgData.hits[0].webformatURL,
                 imgTag: imgData.hits[0].tags
             }).then( () =>  displayData())

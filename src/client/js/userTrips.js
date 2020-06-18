@@ -11,7 +11,7 @@ if(JSON.parse(localStorage.getItem('trips'))) {
         const parag3 = document.createElement('p')
         const parag4 = document.createElement('img')
         const button = document.createElement('button')
-        parag1.innerHTML = getSavedTrips[i].newEntry.city
+        parag1.innerHTML = getSavedTrips[i].newEntry.city + getSavedTrips[i].newEntry.tripDuration
         parag2.innerHTML = getSavedTrips[i].newEntry.description
         parag3.innerHTML = getSavedTrips[i].newEntry.temperature + ' °C'
         parag4.setAttribute('src', getSavedTrips[i].newEntry.image)
@@ -40,7 +40,7 @@ const displaySavedTrips = () => {
         const parag6 = document.createElement('p')
         const parag7 = document.createElement('p')
         const parag8 = document.createElement('img')
-        parag5.innerHTML = getSavedTrips[getSavedTrips.length -1].newEntry.city
+        parag5.innerHTML = getSavedTrips[getSavedTrips.length -1].newEntry.city + getSavedTrips[getSavedTrips.length -1].newEntry.tripDuration
         parag6.innerHTML = getSavedTrips[getSavedTrips.length -1].newEntry.description
         parag7.innerHTML = getSavedTrips[getSavedTrips.length -1].newEntry.temperature + ' °C'
         parag8.setAttribute('src', getSavedTrips[getSavedTrips.length -1].newEntry.image)

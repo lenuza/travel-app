@@ -28,6 +28,7 @@ app.post('/weatherData', (req, res) => {
         city: req.body.city,
         description: req.body.description,
         temperature: req.body.temperature,
+        tripDuration: req.body.tripDuration,
         image: req.body.image,
         imgTag: req.body.imgTag
     }
