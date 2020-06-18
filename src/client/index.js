@@ -8,8 +8,7 @@ import { getData } from './js/getDisplayData'
 import { setData } from './js/localStorage'
 import { removeData } from './js/localStorage'
 import { displaySavedTrips } from './js/userTrips'
-
-
+import { removeTrip } from './js/localStorage'
 
 export {
     postData,
@@ -18,5 +17,6 @@ export {
     getData,
     setData,
     removeData,
-    displaySavedTrips
+    displaySavedTrips,
+    removeTrip
 }

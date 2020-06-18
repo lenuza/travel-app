@@ -12,9 +12,17 @@ const setData = () => {
     .then( () => displaySavedTrips())
 }
 
-function removeData (){
+function removeData() {
     localStorage.removeItem('trips')
+}
+
+document.getElementById('saved-trips').addEventListener('click', removeTrip)
+
+function removeTrip() {
+    document.getElementById('saved-trips').removeChild(event.target.parentNode)
+    console.log(event.target.parentNode)
 }
 
 exports.setData = setData
 exports.removeData = removeData
+exports.removeTrip = removeTrip
