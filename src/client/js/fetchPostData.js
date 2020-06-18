@@ -17,6 +17,7 @@ const passCityData = (city, key) => {
         .then(output =>
             fetchPixabay(output.geonames[0].name, output.geonames[0].countryName)
                 .then(imgData => {
+                    console.log(imgData)
                     fetchWeatherBit(output.geonames[0].lat,output.geonames[0].lng, output.geonames[0].name, imgData)
                 }))
         .catch(console.log)
@@ -31,13 +32,22 @@ const parseGeoData = (city, key) => {
 }
 
 const fetchPixabay = (city, country) => {
-    console.log(country)
     return fetch(`https://pixabay.com/api/?key=${process.env.PIXABAY_APP_KEY}&q=${city}&image_type=photo&pretty=true&category=nature`)
             .then( res => {
                 return res.json()
             })
             .then( data => {
-                return data
+                if(data.total > 0) {
+                    return data
+                } else {
+                    return fetch(`https://pixabay.com/api/?key=${process.env.PIXABAY_APP_KEY}&q=${country}&image_type=photo&pretty=true&category=nature`)
+                        .then(res => {
+                            return res.json()
+                        })
+                        .then(data => {
+                            return data
+                        })
+                }
             })
             .catch(console.log)
 }
@@ -59,9 +69,9 @@ const fetchWeatherBit = (lat, lng, city, imgData) => {
     //clearing the input fields
     document.getElementById('start-date').value = ''
     document.getElementById('return-date').value = ''
-    //calculate which wetaher data to get current or after a week
+    //calculate which wetaher data to get current or after one week
     const diff = startDate - start
-    //calculate trip duration
+    //calculate trip duration and turn it into days
     const tripDuration = Math.floor((returnDate - startDate)/86400000)
     console.log(Math.floor((returnDate - startDate)/86400000))
 
