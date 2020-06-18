@@ -19,7 +19,7 @@ if(JSON.parse(localStorage.getItem('trips'))) {
         button.setAttribute('class', 'button')
         button.setAttribute('id', 'remove-trip')
         button.innerHTML = "remove trip"
-        holder.setAttribute('id', i)
+        holder.setAttribute('id', getSavedTrips[i].newEntry.city)
         holder.appendChild(parag1)
         holder.appendChild(parag2)
         holder.appendChild(parag3)

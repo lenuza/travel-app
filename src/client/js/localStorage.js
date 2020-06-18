@@ -19,8 +19,10 @@ function removeData() {
 document.getElementById('saved-trips').addEventListener('click', removeTrip)
 
 function removeTrip() {
-    document.getElementById('saved-trips').removeChild(event.target.parentNode)
-    console.log(event.target.parentNode)
+    const tripToDelete = document.getElementById('saved-trips').removeChild(event.target.parentNode)
+    console.log(tripToDelete.id)
+    const tripsLeft = JSON.parse(localStorage.getItem('trips')).filter(trip => trip.newEntry.city != tripToDelete.id )
+    return  localStorage.setItem('trips', JSON.stringify(tripsLeft))
 }
 
 exports.setData = setData
