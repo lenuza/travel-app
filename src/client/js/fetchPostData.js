@@ -1,6 +1,8 @@
 const { displayData } = require('./getDisplayData')
+const { setData } = require('./localStorage')
 
 document.getElementById('button').addEventListener('click', getCityData)
+document.getElementById('save-trip').addEventListener('click', setData)
 
 function getCityData() {
 
@@ -125,3 +127,5 @@ async function postData (url = '', data = {}) {
     const newData =  await response.json()
     return newData
 }
+
+exports.setData = setData
