@@ -15,7 +15,7 @@ const passCityData = (city, key) => {
 
     parseGeoData(city, key)
         .then(output =>
-            fetchPixabay(output.geonames[0].countryName)
+            fetchPixabay(output.geonames[0].name, output.geonames[0].countryName)
                 .then(imgData => {
                     fetchWeatherBit(output.geonames[0].lat,output.geonames[0].lng, output.geonames[0].name, imgData)
                 }))
@@ -30,9 +30,10 @@ const parseGeoData = (city, key) => {
         .catch(console.log)
 }
 
-const fetchPixabay = (city) => {
+const fetchPixabay = (city, country) => {
+    console.log(country)
     return fetch(`https://pixabay.com/api/?key=${process.env.PIXABAY_APP_KEY}&q=${city}&image_type=photo&pretty=true&category=nature`)
-            .then(res => {
+            .then( res => {
                 return res.json()
             })
             .then( data => {
@@ -70,9 +71,8 @@ const fetchWeatherBit = (lat, lng, city, imgData) => {
                 temperature: data.data[0].temp,
                 image: imgData.hits[0].webformatURL,
                 imgTag: imgData.hits[0].tags
-            })
+            }).then( () =>  displayData())
         })
-        .then( () =>  displayData())
         .catch(console.log)
     }
     else {
@@ -87,9 +87,8 @@ const fetchWeatherBit = (lat, lng, city, imgData) => {
                 temperature: data.data[0].temp,
                 image: imgData.hits[0].webformatURL,
                 imgTag: imgData.hits[0].tags
-            })
+            }).then( () =>  displayData())
         })
-        .then( () =>  displayData())
         .catch(console.log)
     }
 }

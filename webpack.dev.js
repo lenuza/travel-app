@@ -16,8 +16,10 @@ module.exports = {
     stats: 'errors-warnings',
     target: 'web',
     output: {
-        libraryTarget: 'var',
-        library: 'Client'
+        libraryTarget: 'umd',
+        library: 'Client',
+        umdNamedDefine: true, // optional
+        globalObject: 'this' // optional
     },
     module: {
         rules: [

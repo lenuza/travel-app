@@ -1,6 +1,6 @@
 require('dotenv').config()
 //endpoint for all routes
-const projectData = {trips: []};
+const projectData = {};
 const path = require('path')
 const express = require('express')
 const cors = require('cors')
@@ -32,16 +32,16 @@ app.post('/weatherData', (req, res) => {
         imgTag: req.body.imgTag
     }
 
-    projectData.trips.push(newEntry)
-    // projectData['newEntry'] = newEntry
+    projectData['newEntry'] = newEntry
     console.log(newEntry)
 
     res.json(newEntry)
 })
 
 app.get('/getWeatherData', (req, res) => {
-    res.send(projectData.trips);
+    res.send(projectData);
     console.log('data sent')
+    console.log(projectData)
 })
 
 app.use(function (req, res, next) {
