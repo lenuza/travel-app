@@ -17,12 +17,6 @@ app.get('/', function (req, res) {
     res.sendFile('src/client/view/index.html')
 })
 
-// set port
-const port = process.env.port || 8000;
-const server = app.listen(port, () => {
-    console.log(`Hello, listening on port ${port}`);
-})
-
 app.post('/weatherData', (req, res) => {
     var newEntry = {
         city: req.body.city,
@@ -48,3 +42,5 @@ app.get('/getWeatherData', (req, res) => {
 app.use(function (req, res, next) {
     res.status(404).send("Sorry can't find that!")
 })
+
+module.exports = app
