@@ -1,5 +1,6 @@
 const { displayData } = require('./getDisplayData')
 const { setData } = require('./localStorage')
+const { fetchGeoName } = require('./fetchGeoData')
 
 document.getElementById('button').addEventListener('click', getCityData)
 document.getElementById('save-trip').addEventListener('click', setData)
@@ -52,16 +53,6 @@ const fetchPixabay = (city, country) => {
                 }
             })
             .catch(console.log)
-}
-
-const fetchGeoName = (city, key) => {
-    const url = 'http://api.geonames.org/searchJSON?q='
-
-    return fetch(url + city + '&maxRows=1&username=' + key)
-        .then(res => {
-            return res.text()
-        })
-        .catch(console.log)
 }
 
 const fetchWeatherBit = (lat, lng, city, imgData) => {

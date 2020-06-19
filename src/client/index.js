@@ -9,6 +9,7 @@ import { setData } from './js/localStorage'
 import { removeData } from './js/localStorage'
 import { displaySavedTrips } from './js/userTrips'
 import { removeTrip } from './js/localStorage'
+import { fetchGeoName } from './js/fetchGeoData'
 
 export {
     postData,
@@ -18,5 +19,6 @@ export {
     setData,
     removeData,
     displaySavedTrips,
-    removeTrip
+    removeTrip,
+    fetchGeoName
 }
