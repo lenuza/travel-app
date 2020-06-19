@@ -1,6 +1,6 @@
 const { displayData } = require('./getDisplayData')
 const { setData } = require('./localStorage')
-const { fetchGeoName } = require('./fetchGeoData')
+const { parseGeoData } = require('./parseGeoData')
 
 document.getElementById('button').addEventListener('click', getCityData)
 document.getElementById('save-trip').addEventListener('click', setData)
@@ -23,14 +23,6 @@ const passCityData = (city, key) => {
                     console.log(imgData)
                     fetchWeatherBit(output.geonames[0].lat,output.geonames[0].lng, output.geonames[0].name, imgData)
                 }))
-        .catch(console.log)
-}
-
-const parseGeoData = (city, key) => {
-    return fetchGeoName(city, key)
-        .then(text => {
-            return JSON.parse(text)
-        })
         .catch(console.log)
 }
 
