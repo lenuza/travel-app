@@ -15,7 +15,6 @@ if(localStorage.getItem('trips') != null) {
         parag3.setAttribute('src', getSavedTrips[i].newEntry.image)
         parag3.setAttribute('alt', getSavedTrips[i].newEntry.imgTag)
         button.setAttribute('class', 'button')
-        button.setAttribute('id', 'remove-trip')
         button.innerHTML = "remove trip"
         holder.setAttribute('id', getSavedTrips[i].newEntry.city + getSavedTrips[i].newEntry.tripDuration)
         holder.appendChild(parag1)
