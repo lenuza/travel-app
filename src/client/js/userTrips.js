@@ -1,7 +1,8 @@
 const allTrips = document.getElementById('saved-trips')
 
-if(JSON.parse(localStorage.getItem('trips'))) {
+if(localStorage.getItem('trips')) {
     const getSavedTrips = JSON.parse(localStorage.getItem('trips'))
+    // const trips = getSavedTrips[0].trips
     console.log(getSavedTrips)
     for (var i = 0; i < getSavedTrips.length; i++) {
         const holder = document.createElement('div')
@@ -30,21 +31,24 @@ if(JSON.parse(localStorage.getItem('trips'))) {
 }
 
 const displaySavedTrips = () => {
-    const getSavedTrips = JSON.parse(localStorage.getItem('trips'))
+    let getSavedTrip = JSON.parse(localStorage.getItem('trips'))
+    let trip = getSavedTrip[getSavedTrip.length - 1]
+    console.log(trip)
 
-    if(getSavedTrips) {
-        console.log(getSavedTrips)
+    if(getSavedTrip) {
+        console.log(getSavedTrip)
         const holderDiv = document.createElement('div')
         holderDiv.setAttribute('class', 'user-trips')
         const parag5 = document.createElement('p')
         const parag6 = document.createElement('p')
         const parag7 = document.createElement('p')
         const parag8 = document.createElement('img')
-        parag5.innerHTML = getSavedTrips[getSavedTrips.length -1].newEntry.city + getSavedTrips[getSavedTrips.length -1].newEntry.tripDuration
-        parag6.innerHTML = getSavedTrips[getSavedTrips.length -1].newEntry.description
-        parag7.innerHTML = getSavedTrips[getSavedTrips.length -1].newEntry.temperature + ' °C'
-        parag8.setAttribute('src', getSavedTrips[getSavedTrips.length -1].newEntry.image)
-        parag8.setAttribute('alt', getSavedTrips[getSavedTrips.length -1].newEntry.imgTag)
+        parag5.innerHTML = trip.newEntry.city + trip.newEntry.tripDuration
+        parag6.innerHTML = trip.newEntry.description
+        parag7.innerHTML = trip.newEntry.temperature + ' °C'
+        parag8.setAttribute('src', trip.newEntry.image)
+        parag8.setAttribute('alt', trip.newEntry.imgTag)
+        holderDiv.setAttribute('id', trip.newEntry.city + trip.newEntry.tripDuration)
         holderDiv.appendChild(parag5)
         holderDiv.appendChild(parag6)
         holderDiv.appendChild(parag7)

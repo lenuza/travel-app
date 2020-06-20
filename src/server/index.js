@@ -27,6 +27,7 @@ app.post('/weatherData', (req, res) => {
         imgTag: req.body.imgTag
     }
 
+    // projectData.trips.push(newEntry)
     projectData['newEntry'] = newEntry
     console.log(newEntry)
 

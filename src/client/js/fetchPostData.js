@@ -1,6 +1,6 @@
+const { parseGeoData } = require('./parseGeoData')
 const { displayData } = require('./getDisplayData')
 const { setData } = require('./localStorage')
-const { parseGeoData } = require('./parseGeoData')
 
 document.getElementById('button').addEventListener('click', getCityData)
 document.getElementById('save-trip').addEventListener('click', setData)

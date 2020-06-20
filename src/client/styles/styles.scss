@@ -1,7 +1,9 @@
 body {
     background-color: #fff;
     width: 100%;
-    margin: auto;
+    height: auto;
+    margin: 0;
+    padding: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -19,34 +21,80 @@ footer {
 }
 
 .container {
-    background-color: #fee;
+    background-color: #e5e3e3;
     width: 100%;
     margin: auto;
     display: grid;
     align-content: center;
     grid-template-columns: 1fr;
     grid-template-areas: "image"
+                        "results"
                         "info";
 
     .travel-image {
         grid-area: image;
+        height: 15em;
+        width: 98%;
         margin: auto;
+
+        img {
+            height: 15em;
+            width: 100%;
+            margin: auto;
+        }
     }
 
-    .travel-information {
+    .trip-results {
+        grid-area: results;
+        height: 1em;
+        text-align: center;
+        margin-top: 05em;
+        font-size: 1.3em;
+    }
+
+    .trip-info-container {
         grid-area: info;
+        display: flex;
         margin: auto;
         margin-bottom: 2em;
+        flex-direction: column;
+        flex-wrap: nowrap;
 
         h2 {
             text-align: center;
             text-transform: capitalize;
+            width: 100%;
         }
 
-        .button {
+        .button, .form-button {
             width: 100%;
             text-transform: uppercase;
             margin: 0.1em;
+            border: 3px solid #333;
+            height: 1.8em;
+        }
+    }
+}
+
+.trip-info {
+    width: 100%;
+    margin: auto;
+
+    form {
+        label {
+            display: block;
+            text-align: center;
+            width: 100%;
+            margin: auto;
+            font-size: 1.3em;
+        }
+
+        input {
+            width: 100%;
+            font-size: 1.5em;
+            line-height: 1.5em;
+            margin-bottom: 0.6em;
+            box-sizing: border-box;
         }
     }
 }
@@ -61,7 +109,7 @@ footer {
         grid-template-areas: "image info"
                             "image info";
 
-        .travel-information {
+        .trip-info-container {
             margin-bottom: auto;
             width: 90%;
 

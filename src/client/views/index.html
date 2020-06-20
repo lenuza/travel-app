@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel planner</title>
 </head>
+
 <body>
     <header>
         <h1>travel planner</h1>
@@ -13,7 +15,13 @@
         <div class="travel-image">
             <img id="trip-img" src="../images/paolo-nicolello-unsplash.jpg" alt="beach waves">
         </div>
-        <div class="travel-information">
+        <div id="trip-results" class="trip-results">
+            <div id="city"></div>
+            <div id="trip-duration"></div>
+            <div id="temp"></div>
+            <div id="description"></div>
+        </div>
+        <div class="trip-info-container">
             <h2>my trip to</h2>
             <div class="trip-info">
                 <form action="">
@@ -30,19 +38,14 @@
                     <button type="button" class="form-button" id="button">go</button>
                 </form>
             </div>
-            <div>
+            <div class="buttons">
                 <button id="save-trip" class="button">save trip</button>
-                <button id="remove-trip" onclick="Client.removeData()" class="button">remove trip</button>
+                <button id="remove-trip" onclick="Client.clearData()" class="button">clear trip</button>
             </div>
-        </div>
-        <div id="trip-results" class="trip-results">
-            <div id="city"></div>
-            <div id="trip-duration"></div>
-            <div id="temp"></div>
-            <div id="description"></div>
         </div>
     </main>
     <section id="saved-trips"></section>
     <footer></footer>
 </body>
+
 </html>

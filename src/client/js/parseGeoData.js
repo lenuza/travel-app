@@ -9,4 +9,3 @@ const parseGeoData = (city, key) => {
 }
 
 exports.parseGeoData = parseGeoData
-// exports.fetchGeoName = fetchGeoName
