@@ -22,6 +22,7 @@ footer {
 
 .container {
     background-color: #e5e3e3;
+    padding: 0.8em;
     width: 100%;
     margin: auto;
     display: grid;
@@ -72,6 +73,12 @@ footer {
             margin: 0.1em;
             border: 3px solid #333;
             height: 1.8em;
+
+            &:hover {
+                background-color: #333;
+                border: 3px solid #ddd;
+                color: #ddd;
+            }
         }
     }
 }
@@ -95,6 +102,10 @@ footer {
             line-height: 1.5em;
             margin-bottom: 0.6em;
             box-sizing: border-box;
+
+            &:hover {
+                cursor: pointer;
+            }
         }
     }
 }

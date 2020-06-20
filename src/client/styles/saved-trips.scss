@@ -1,14 +1,15 @@
 .saved-trips {
     background-color: #fee;
+    padding: 0.8em;
     width: 100%;
     margin: auto;
+    border: 5px solid #fff;
 }
 
 .user-trips {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
-    border: 5px solid #fff;
 
     p {
         width: 30%;
@@ -16,5 +17,9 @@
 
     image {
         width: 60%;
+    }
+
+    &:hover {
+        opacity: 0.5;
     }
 }
