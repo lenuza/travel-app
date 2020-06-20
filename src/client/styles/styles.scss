@@ -31,6 +31,7 @@ footer {
 .container {
     background-color: #e5e3e3;
     box-sizing: border-box;
+    border: 5px solid #fff;
     padding: 0.8em;
     width: 98%;
     margin: auto;
@@ -82,9 +83,9 @@ footer {
         .form-button {
             width: 100%;
             text-transform: uppercase;
-            margin: 0.1em;
+            margin: 0 0 0.5em 0;
             border: 3px solid #333;
-            height: 1.8em;
+            height: 2.5em;
 
             &:hover {
                 background-color: #333;
