@@ -8,12 +8,10 @@ import { getData } from './js/getDisplayData'
 import { displayData } from './js/getDisplayData'
 import { clearData } from './js/getDisplayData'
 import { setData } from './js/localStorage'
-// import { removeData } from './js/localStorage'
 import { displaySavedTrips } from './js/userTrips'
 import { removeTrip } from './js/localStorage'
 import { fetchGeoName } from './js/fetchGeoData'
 import { parseGeoData } from './js/parseGeoData'
-// import img from '../client/images/paolo-nicolello-unsplash.jpg'
 
 export {
     postData,
@@ -21,7 +19,6 @@ export {
     cityWeather,
     getData,
     setData,
-    // removeData,
     displaySavedTrips,
     removeTrip,
     fetchGeoName,

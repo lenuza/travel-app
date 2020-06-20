@@ -10,7 +10,9 @@ const app = express()
 
 app.use(express.static('dist'))
 app.use(cors())
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({
+    extended: false
+}))
 app.use(bodyParser.json())
 
 app.get('/', function (req, res) {
@@ -28,7 +30,6 @@ app.post('/weatherData', (req, res) => {
         tripStart: req.body.tripStart
     }
 
-    // projectData.trips.push(newEntry)
     projectData['newEntry'] = newEntry
     console.log(newEntry)
 
@@ -38,7 +39,6 @@ app.post('/weatherData', (req, res) => {
 app.get('/getWeatherData', (req, res) => {
     res.send(projectData);
     console.log('data sent')
-    console.log(projectData)
 })
 
 app.use(function (req, res, next) {

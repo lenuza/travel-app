@@ -1,4 +1,6 @@
-const { fetchGeoName } = require('./fetchGeoData')
+const {
+    fetchGeoName
+} = require('./fetchGeoData')
 
 const parseGeoData = (city, key) => {
     return fetchGeoName(city, key)

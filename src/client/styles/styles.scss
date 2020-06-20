@@ -76,7 +76,12 @@ footer {
         h2 {
             text-align: center;
             text-transform: capitalize;
+            margin: auto;
             width: 100%;
+            font-family: 'Caveat', cursive;
+            font-weight: 900;
+            font-size: 3.5em;
+            text-decoration: underline;
         }
 
         .button,
@@ -86,6 +91,7 @@ footer {
             margin: 0 0 0.5em 0;
             border: 3px solid #333;
             height: 2.5em;
+            font-weight: bolder;
 
             &:hover {
                 background-color: #333;
@@ -106,7 +112,8 @@ footer {
             text-align: center;
             width: 100%;
             margin: auto;
-            font-size: 1.3em;
+            font-size: 1.5em;
+            font-weight: bolder;
             text-transform: capitalize;
         }
 
@@ -130,9 +137,10 @@ footer {
 @media screen and (min-width: 1026px) {
 
     .container {
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas: "image results"
-                             "image info";
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-areas: "image image . info info info"
+            "image image results info info info"
+            "image image . info info info";
 
         .travel-image {
             width: 100%;
@@ -144,7 +152,9 @@ footer {
 
         .trip-results {
             text-align: left;
-            padding-left: 3em;
+            padding-right: 1em;
+            font-size: 1.3em;
+            font-weight: bolder;
         }
 
         .trip-info-container {
@@ -198,13 +208,11 @@ footer {
     }
 
     .form-section-date {
-            flex-wrap: nowrap;
-            flex-direction: row;
+        flex-wrap: nowrap;
+        flex-direction: row;
 
-            .trip-date {
-                width: 45%;
-            }
+        .trip-date {
+            width: 45%;
+        }
     }
-
-
 }
