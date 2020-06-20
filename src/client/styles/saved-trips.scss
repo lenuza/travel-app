@@ -1,5 +1,6 @@
 .saved-trips {
     background-color: #fee;
+    box-sizing: border-box;
     padding: 0.8em;
     width: 100%;
     margin: auto;
@@ -9,17 +10,46 @@
 .user-trips {
     display: flex;
     flex-wrap: nowrap;
-    flex-direction: row;
+    flex-direction: column;
+    text-align: justify;
 
     p {
-        width: 30%;
+        width: 100%;
     }
 
-    image {
-        width: 60%;
+    img {
+        box-sizing: border-box;
+        border: 5px solid #ddd;
+        border-radius: 4px;
+        padding: 5px;
+        width: 100%;
+        object-fit: contain;
+        margin: auto;
+    }
+    button {
+        width: 100%;
     }
 
     &:hover {
         opacity: 0.5;
+    }
+}
+
+/****************Media Queries*********/
+
+@media screen and (min-width: 1026px) {
+
+    .user-trips {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+
+        p {
+            width: 30%;
+        }
+
+        image {
+            width: 60%;
+        }
     }
 }
