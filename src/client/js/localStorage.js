@@ -26,17 +26,20 @@ const setData = () => {
 document.getElementById('saved-trips').addEventListener('click', removeTrip)
 
 function removeTrip() {
-    const tripToDelete = document.getElementById('saved-trips').removeChild(event.target.parentNode)
-    console.log(event.target.parentNode)
-    const storedTrips = JSON.parse(localStorage.getItem('trips'))
-    console.log(storedTrips)
 
-    const tripsLeft = storedTrips.filter(trip => {
-        console.log(trip)
-        return trip.newEntry.city+trip.newEntry.tripDuration != tripToDelete.id //in case there are more then 1 trip to one destination
-    })
-    console.log(tripsLeft)
-    return  localStorage.setItem('trips', JSON.stringify(tripsLeft))
+    if (event.target.nodeName === 'BUTTON') {   const tripToDelete = document.getElementById('saved-trips').removeChild(event.target.parentNode)
+        console.log(event.target.parentNode)
+        const storedTrips = JSON.parse(localStorage.getItem('trips'))
+        console.log(storedTrips)
+
+        const tripsLeft = storedTrips.filter(trip => {
+            console.log(trip)
+            return trip.newEntry.city+trip.newEntry.tripDuration != tripToDelete.id //in case there are more then 1 trip to one destination
+        })
+        console.log(tripsLeft)
+        return  localStorage.setItem('trips', JSON.stringify(tripsLeft))
+    }
+
 }
 
 exports.setData = setData
