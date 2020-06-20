@@ -172,7 +172,18 @@ footer {
         width: 100%;
         display: flex;
         flex-wrap: nowrap;
-        flex-direction: row;
+
+        .form-button {
+            box-sizing: border-box;
+            width: 100%;
+            text-transform: uppercase;
+            margin: 0.1em 0;
+            padding: 0;
+        }
+    }
+
+    .form-section-destination {
+        flex-direction: column;
 
         label {
             width: 100%;
@@ -183,14 +194,15 @@ footer {
             width: 100%;
             height: 1.5em;
         }
+    }
 
-        .form-button {
-            box-sizing: border-box;
-            width: 100%;
-            text-transform: uppercase;
-            margin: 0.1em 0;
-            padding: 0;
-        }
+    .form-section-date {
+            flex-wrap: nowrap;
+            flex-direction: row;
+
+            .trip-date {
+                width: 45%;
+            }
     }
 
 
