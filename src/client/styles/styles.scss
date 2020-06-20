@@ -130,13 +130,25 @@ footer {
 
     .container {
         grid-template-columns: 1fr 1fr;
-        grid-template-areas: "image info"
-            "image info";
+        grid-template-areas: "image results"
+                             "image info";
+
+        .travel-image {
+            width: 100%;
+
+            img {
+                width: 80%;
+            }
+        }
+
+        .trip-results {
+            text-align: left;
+            padding-left: 3em;
+        }
 
         .trip-info-container {
             margin-bottom: auto;
             width: 90%;
-
 
             .buttons {
                 width: 100%;
@@ -160,13 +172,15 @@ footer {
         width: 100%;
         display: flex;
         flex-wrap: nowrap;
+        flex-direction: row;
 
         label {
-            width: 30%;
+            width: 100%;
+            text-align: left;
         }
 
         input {
-            width: 70%;
+            width: 100%;
             height: 1.5em;
         }
 

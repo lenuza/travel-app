@@ -50,6 +50,10 @@ const fetchPixabay = (city, country) => {
 const fetchWeatherBit = (lat, lng, city, imgData) => {
     const start = Date.now()
     const startDate = document.getElementById('start-date').valueAsNumber
+    //taking start date in a format which will be used in the post request
+    const tripStart = document.getElementById('start-date').valueAsDate
+    const tripStartString = String(tripStart).slice(0,16)
+    console.log(tripStartString)
     const returnDate = document.getElementById('return-date').valueAsNumber
     //clearing the input fields
     document.getElementById('start-date').value = ''
@@ -72,7 +76,8 @@ const fetchWeatherBit = (lat, lng, city, imgData) => {
                 temperature: data.data[0].temp,
                 tripDuration: tripDuration,
                 image: imgData.hits[0].webformatURL,
-                imgTag: imgData.hits[0].tags
+                imgTag: imgData.hits[0].tags,
+                tripStart: tripStartString
             }).then( () =>  displayData())
         })
         .catch(console.log)
@@ -89,7 +94,8 @@ const fetchWeatherBit = (lat, lng, city, imgData) => {
                 temperature: data.data[0].temp,
                 tripDuration: tripDuration,
                 image: imgData.hits[0].webformatURL,
-                imgTag: imgData.hits[0].tags
+                imgTag: imgData.hits[0].tags,
+                tripStart: tripStartString
             }).then( () =>  displayData())
         })
         .catch(console.log)
