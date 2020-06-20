@@ -35,10 +35,12 @@
         border: 5px solid #ddd;
         border-radius: 0 0 4px 4px;
         text-transform: capitalize;
-    }
 
-    &:hover {
-        opacity: 0.5;
+        &:hover {
+            background-color: #333;
+            border: 5px solid #ddd;
+            color: #ddd;;
+        }
     }
 }
 
