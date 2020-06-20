@@ -19,9 +19,9 @@ const setData = () => {
     .then( () => displaySavedTrips())
 }
 
-function removeData() {
-    localStorage.removeItem('trips')
-}
+// function removeData() {
+//     localStorage.removeItem('trips')
+// }
 
 document.getElementById('saved-trips').addEventListener('click', removeTrip)
 
@@ -40,5 +40,5 @@ function removeTrip() {
 }
 
 exports.setData = setData
-exports.removeData = removeData
+// exports.removeData = removeData
 exports.removeTrip = removeTrip

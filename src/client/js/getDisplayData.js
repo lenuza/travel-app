@@ -1,3 +1,5 @@
+document.getElementById('clear-trip').addEventListener('click', clearData)
+
 // async get request
 const getData = async (url = 'http://localhost:8000/getWeatherData') => {
     const request = await fetch(url)
@@ -22,5 +24,16 @@ const displayData = () => {
     })
 }
 
+const clearData = () => {
+
+        document.getElementById('city').innerHTML = ''
+        document.getElementById('trip-duration').innerHTML = ''
+        document.getElementById('description').innerHTML = ''
+        document.getElementById('temp').innerHTML = ''
+        document.getElementById('trip-img').setAttribute('src', 'paolo-nicolello-unsplash.jpg')
+        document.getElementById('trip-img').setAttribute('alt', 'beach waves')
+}
+
 exports.displayData = displayData
+exports.clearData = clearData
 exports.getData = getData
