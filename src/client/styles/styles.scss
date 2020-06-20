@@ -38,8 +38,8 @@ footer {
     align-content: center;
     grid-template-columns: 1fr;
     grid-template-areas: "image"
-                        "results"
-                        "info";
+        "results"
+        "info";
 
     .travel-image {
         grid-area: image;
@@ -78,7 +78,8 @@ footer {
             width: 100%;
         }
 
-        .button, .form-button {
+        .button,
+        .form-button {
             width: 100%;
             text-transform: uppercase;
             margin: 0.1em;
@@ -105,6 +106,7 @@ footer {
             width: 100%;
             margin: auto;
             font-size: 1.3em;
+            text-transform: capitalize;
         }
 
         input {
@@ -129,20 +131,29 @@ footer {
     .container {
         grid-template-columns: 1fr 1fr;
         grid-template-areas: "image info"
-                            "image info";
+            "image info";
 
         .trip-info-container {
             margin-bottom: auto;
             width: 90%;
 
-            .button {
-                width: 45%;
+
+            .buttons {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+
+                .button {
+                    width: 50%;
+                }
             }
         }
     }
 
     .trip-info {
-        width: 90%;
+        width: 100%;
+        margin: 0;
     }
 
     .form-section {
@@ -158,14 +169,15 @@ footer {
             width: 70%;
             height: 1.5em;
         }
+
+        .form-button {
+            box-sizing: border-box;
+            width: 100%;
+            text-transform: uppercase;
+            margin: 0.1em 0;
+            padding: 0;
+        }
     }
 
-    .form-button {
-        width: 100%;
-        text-transform: uppercase;
-        margin: 0.1em;
-    }
+
 }
-
-
-

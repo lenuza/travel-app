@@ -47,16 +47,30 @@
 @media screen and (min-width: 1026px) {
 
     .user-trips {
-        display: flex;
-        flex-wrap: nowrap;
-        flex-direction: row;
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-areas:    " . parag1 parag1 . img ."
+                                ". parag2 parag2  . img ."
+                                ". . btn . img .";
 
-        p {
-            width: 30%;
+        p:first-of-type{
+            grid-area: parag1;
         }
 
-        image {
-            width: 60%;
+        p:last-of-type {
+            grid-area: parag2;
+        }
+
+        img {
+            grid-area: img;
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+        button {
+            // width: 100%;
+            grid-area: btn;
+            border-radius: 4px;
         }
     }
 }
