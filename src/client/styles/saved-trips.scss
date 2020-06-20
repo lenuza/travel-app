@@ -2,6 +2,7 @@
     background-color: #fee;
     box-sizing: border-box;
     padding: 0.8em;
+    padding-bottom: 0;
     width: 100%;
     margin: auto;
     border: 5px solid #fff;
@@ -12,6 +13,8 @@
     flex-wrap: nowrap;
     flex-direction: column;
     text-align: justify;
+    padding-bottom: 1em;
+    border-bottom: 5px double #ddd;
 
     p {
         width: 100%;
