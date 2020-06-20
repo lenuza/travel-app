@@ -5,9 +5,16 @@ let tripObject = {trip: []}
 const setData = () => {
     getData()
     .then(data => {
-        console.log(data)
-        tripObject.trip.push(data)
-        return  localStorage.setItem('trips', JSON.stringify(tripObject.trip))
+        if(!JSON.parse(localStorage.getItem('trips'))) {
+            console.log(data)
+            tripObject.trip.push(data)
+            return  localStorage.setItem('trips', JSON.stringify(tripObject.trip))
+        }
+        else {
+            const savedTrips = JSON.parse(localStorage.getItem('trips'))
+            savedTrips.push(data)
+            return  localStorage.setItem('trips', JSON.stringify(savedTrips))
+        }
     })
     .then( () => displaySavedTrips())
 }
